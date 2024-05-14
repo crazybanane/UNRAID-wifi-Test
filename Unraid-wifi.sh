@@ -67,18 +67,18 @@ make -j12
 make -j12 modules_install
 make -j12 firmware_install
 
-# Build RTL8812AU driver
+# Build RTL8852AU driver
 
-rm -R /tmp/rtl8812au &>/dev/null
-git clone https://github.com/zebulon2/rtl8812au-driver-5.2.9 /tmp/rtl8812au
-cd /tmp/rtl8812au
+rm -R /tmp/rtl8852au &>/dev/null
+git clone https://github.com/lwfinger/rtl8852au /tmp/rtl8852au
+cd /tmp/rtl8852au
 make clean
 make -j12
-gzip 8812au.ko
+gzip 8852au.ko
 mkdir /lib/modules/6.9.0-unRAID/kernel/drivers/net/wireless
 chmod 755 /lib/modules/6.9.0-unRAID/kernel/drivers/net/wireless
-cp 8812au.ko.gz /lib/modules/6.9.0-unRAID/kernel/drivers/net/wireless/
-chmod 644 /lib/modules/6.9.0-unRAID/kernel/drivers/net/wireless/8812au.ko.gz
+cp 8852au.ko.gz /lib/modules/6.9.0-unRAID/kernel/drivers/net/wireless/
+chmod 644 /lib/modules/6.9.0-unRAID/kernel/drivers/net/wireless/8852au.ko.gz
 depmod -a
 
 # Create new bzroot and bzimage
