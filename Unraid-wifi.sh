@@ -16,7 +16,7 @@ function install_dep {
 install_dep bc ap/bc-1.07.1-x86_64-6.txz
 install_dep binutils d/binutils-2.42-x86_64-1.txz
 install_dep cpio a/cpio-2.15-x86_64-1.txz
-install_dep gc l/gc-7.4.2-x86_64-3.txz
+install_dep gc l/gc-8.2.6-x86_64-1.txz
 install_dep gcc d/gcc-14.1.0-x86_64-1.txz
 install_dep git d/git-2.45.0-x86_64-1.txz
 install_dep glibc l/glibc-2.39-x86_64-2.txz
@@ -33,7 +33,7 @@ install_dep perl d/perl-5.38.2-x86_64-2.txz
 cd /tmp
 wget https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.9.tar.gz
 tar -C /usr/src/ -zxvf linux-6.9.tar.gz
-ln -sf /usr/src/linux-6.9. /usr/src/linux
+ln -sf /usr/src/linux-6.9 /usr/src/linux
 cp -rf /usr/src/linux-6.9-unRAID/* /usr/src/linux/
 cp -f /usr/src/linux-6.9-unRAID/.config /usr/src/linux/
 
@@ -75,10 +75,10 @@ cd /tmp/rtl8852au
 make clean
 make -j12
 gzip 8852au.ko
-mkdir /lib/modules/6.9.0-unRAID/kernel/drivers/net/wireless
-chmod 755 /lib/modules/6.9.0-unRAID/kernel/drivers/net/wireless
-cp 8852au.ko.gz /lib/modules/6.9.0-unRAID/kernel/drivers/net/wireless/
-chmod 644 /lib/modules/6.9.0-unRAID/kernel/drivers/net/wireless/8852au.ko.gz
+mkdir /lib/modules/6.9.0-Unraid/kernel/drivers/net/wireless
+chmod 755 /lib/modules/6.9.0-Unraid/kernel/drivers/net/wireless
+cp 8852au.ko.gz /lib/modules/6.9.0-Unraid/kernel/drivers/net/wireless/
+chmod 644 /lib/modules/6.9.0-Unraid/kernel/drivers/net/wireless/8852au.ko.gz
 depmod -a
 
 # Create new bzroot and bzimage
@@ -87,12 +87,12 @@ rm -R /tmp/bz &>/dev/null
 mkdir /tmp/bz
 cd /tmp/bz
 xzcat /boot/bzroot | cpio -m -i -d -H newc --no-absolute-filenames
-rsync -av --delete /lib/modules/6.9.0-unRAID/ lib/modules/6.9.0-unRAID/
-cd /tmp/bz/lib/modules/6.9.0-unRAID
+rsync -av --delete /lib/modules/6.9.0-Unraid/ lib/modules/6.9.0-Unraid/
+cd /tmp/bz/lib/modules/6.9.0-Unraid
 rm build
 rm source
 ln -sf /usr/src/linux-6.9.0-unRAID build
 ln -sf /usr/src/linux-6.9.0-unRAID source
 cd /tmp/bz
 find . | cpio -o -H newc | xz --check=crc32 --x86 --lzma2=preset=9e > /boot/bzroot-custom
-cp /usr/src/linux/arch/x86/boot/bzImage /boot/bzimage-custom
+cp /usr/src/linux/arch/x86/boot/bzimage /boot/bzimage-custom
