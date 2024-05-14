@@ -31,11 +31,11 @@ install_dep perl d/perl-5.38.2-x86_64-2.txz
 # Build kernel
 
 cd /tmp
-wget https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.9.0.tar.gz
-tar -C /usr/src/ -zxvf linux-6.9.0.tar.gz
-ln -sf /usr/src/linux-6.9.0 /usr/src/linux
-cp -rf /usr/src/linux-6.9.0-unRAID/* /usr/src/linux/
-cp -f /usr/src/linux-6.9.0-unRAID/.config /usr/src/linux/
+wget https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.9.tar.gz
+tar -C /usr/src/ -zxvf linux-6.9.tar.gz
+ln -sf /usr/src/linux-6.9. /usr/src/linux
+cp -rf /usr/src/linux-6.9-unRAID/* /usr/src/linux/
+cp -f /usr/src/linux-6.9-unRAID/.config /usr/src/linux/
 
 cd /usr/src/linux
 git apply *.patch
